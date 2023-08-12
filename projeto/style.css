@@ -1,33 +1,73 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-* {
-  box-sizing: border-box;
-}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap");
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  background: #222222;
+  color: #ffffff;
+}
+
+ul,
+li,
+h1 {
   margin: 0;
   padding: 0;
 }
 
-ul li {
+input {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+input:focus {
+  outline: none;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 4rem;
+  font-weight: 900;
+  font-size: 2rem;
+  margin-top: 30px;
+}
+
+ul {
   list-style: none;
 }
 
-.flex {
-  display: flex;
-  /* justify-content: center; */
+ul li {
+  margin-bottom: 20px;
 }
 
-.apagar,
-.editar {
-  background: #9832f7;
-  color: #250841;
-  border: none;
-  border-radius: 1rem;
-  padding: 0.62rem 1.25rem;
-  margin-right: 1rem;
+ul li button {
+  margin-left: 1rem;
+  justify-content: end;
 }
-/* .invisivel {
-  display: none;
-} */
+
+.btnConfiguracao {
+  padding: 10px 20px;
+  background: #ffca28;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #42350e;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.inputConfiguracao {
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.corVerde {
+  background: #73c991;
+  padding: 10px 20px;
+  font-size: 2rem;
+  border-radius: 4px;
+}

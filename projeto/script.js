@@ -1,88 +1,124 @@
-const inputTarefa = document.querySelector(".input-tarefa");
-const btnTarefa = document.querySelector(".btn-tarefa");
-const tarefas = document.querySelector(".tarefas");
+const adicionaBotao = document.querySelector("#adicionaBotao");
+const textoNoInput = document.querySelector("#textoNoInput");
+const listaDeTarefa = document.querySelector("#listaDeTarefa");
+const idTarefa = document.querySelector("#idTarefa");
+const btnPesquisa = document.querySelector("#btnPesquisa");
+const pesquisaResultado = document.querySelector("#pesquisaResultado");
+const btnListar = document.querySelector("#btnListar");
 
-function criaTd() {
-  const td = document.createElement("td");
-  return td;
+let tarefas = [];
+
+//  Adicona uma tarefa no array
+const adicionaTarefa = (descricao) => {
+  tarefas.push({ id: tarefas.length + 1, descricao });
+  mostraSeFoiSalvo();
+};
+
+// Mostra uma mensagem do salvamento da tarefa e depois executa a função apagarMensagem
+const mostraSeFoiSalvo = () => {
+  listaDeTarefa.innerHTML = "Tarefa salva com sucesso!";
+  listaDeTarefa.setAttribute("class", "corVerde");
+  setTimeout(function () {
+    listaDeTarefa.classList.remove("corVerde");
+    apagarMensagem();
+  }, 1000);
+};
+
+// Função para apagar a mensagem
+function apagarMensagem() {
+  listaDeTarefa.innerHTML = "";
 }
 
-inputTarefa.addEventListener("keypress", function (e) {
-  if (e.keyCode === 13) {
-    if (!inputTarefa.value) return;
-    criaTarefa(inputTarefa.value);
+const atualizarListaTarefas = () => {
+  listaDeTarefa.innerHTML = "";
+  tarefas.forEach((tarefa) => {
+    const li = document.createElement("li");
+    li.setAttribute("class", "resultado");
+    li.innerHTML = `<p>${tarefa.id} - Descrição: ${tarefa.descricao}</p>`;
+
+    const btnEditar = document.createElement("button");
+    btnEditar.setAttribute("class", "btnConfiguracao");
+    btnEditar.innerText = "Editar";
+    btnEditar.addEventListener("click", () => editarTarefa(tarefa.id));
+
+    const btnRemover = document.createElement("button");
+    btnRemover.setAttribute("class", "btnConfiguracao");
+    btnRemover.innerText = "Remover";
+    btnRemover.addEventListener("click", () => removerTarefa(tarefa.id));
+
+    li.appendChild(btnEditar);
+    li.appendChild(btnRemover);
+
+    listaDeTarefa.appendChild(li);
+  });
+};
+
+const editarTarefa = (id) => {
+  const novaDescricao = prompt("Digite a nova descrição da tarefa:");
+  if (novaDescricao !== null) {
+    const tarefa = tarefas.find((tarefa) => tarefa.id === id);
+    if (tarefa) {
+      tarefa.descricao = novaDescricao;
+      atualizarListaTarefas();
+    } else {
+      alert("Tarefa não encontrada.");
+    }
+  }
+};
+
+const removerTarefa = (id) => {
+  const indexDaTarefa = tarefas.findIndex((tarefa) => tarefa.id === id);
+  if (indexDaTarefa !== -1) {
+    tarefas.splice(indexDaTarefa, 1);
+    atualizarListaTarefas();
+  } else {
+    alert("Tarefa não encontrada.");
+  }
+};
+
+const pesquisarTarefasId = (id) => {
+  const tarefa = tarefas.find((tarefa) => tarefa.id === id);
+  if (tarefa) {
+    pesquisaResultado.innerText = `Tarefa encontrada - ID: ${tarefa.id} - Descrição: ${tarefa.descricao}`;
+  } else {
+    pesquisaResultado.innerText = "Tarefa não encontrada.";
+  }
+};
+
+adicionaBotao.addEventListener("click", () => {
+  const descricao = textoNoInput.value;
+  if (descricao.trim() !== "") {
+    adicionaTarefa(descricao);
+    textoNoInput.value = "";
   }
 });
 
-function limpaImput() {
-  inputTarefa.value = "";
-  inputTarefa.focus();
-}
+// Remove o resultado da pesquisa por ID quando for selecionar outra o
+const removeBtnPesquisa = () => {
+  pesquisaResultado.innerText = "";
+};
 
-function criaBotaoApagar(td) {
-  td.innerText += " ";
-  const botaoApagar = document.createElement("button");
-  botaoApagar.innerText = "Apagar";
-  // botaoApagar.classList.add("apagar");
-  botaoApagar.setAttribute("class", "apagar");
-  td.appendChild(botaoApagar);
-}
-
-function criaBotaoEditar(td) {
-  const botaoEditar = document.createElement("button");
-  botaoEditar.innerText = "Editar";
-  botaoEditar.classList.add("editar");
-  td.appendChild(botaoEditar);
-}
-
-function criaTarefa(textoInput) {
-  const td = criaTd();
-  td.innerHTML = textoInput;
-  tarefas.appendChild(td);
-  limpaImput();
-  criaBotaoApagar(td);
-  criaBotaoEditar(td);
-  salvarTarefas();
-}
-
-// 1º
-btnTarefa.addEventListener("click", function () {
-  if (!inputTarefa.value) return;
-  criaTarefa(inputTarefa.value);
-});
-
-document.addEventListener("click", function (e) {
-  const el = e.target;
-
-  if (el.classList.contains("apagar")) {
-    el.parentElement.remove();
-    salvarTarefas();
+btnPesquisa.addEventListener("click", () => {
+  const id = parseInt(idTarefa.value);
+  if (!isNaN(id)) {
+    pesquisarTarefasId(id);
+    idTarefa.value = "";
+  } else {
+    pesquisaResultado.innerText = "ID inválido.";
   }
 });
 
-function salvarTarefas() {
-  const liTarefas = tarefas.querySelectorAll("td");
-  const listaDeTarefas = [];
-
-  for (let tarefa of liTarefas) {
-    let tarefaTexto = tarefa.innerText;
-    tarefaTexto = tarefaTexto.replace("Apagar", "").trim();
-    tarefaTexto = tarefaTexto.replace("Editar", "").trim();
-    listaDeTarefas.push(tarefaTexto);
+btnListar.addEventListener("click", () => {
+  if (tarefas.length === 0) {
+    atualizarListaTarefas();
+  } else {
+    console.log("Lista de Tarefas:");
+    tarefas.forEach((tarefa) => {
+      atualizarListaTarefas();
+    });
   }
+  removeBtnPesquisa();
+});
 
-  const tarefasJSON = JSON.stringify(listaDeTarefas);
-  localStorage.setItem("tarefas", tarefasJSON);
-  console.log(tarefasJSON);
-}
-
-function addicionaTarefasSalvas() {
-  const tarefas = localStorage.getItem("tarefas");
-  const listaDeTarefas = JSON.parse(tarefas);
-
-  for (let tarefa of listaDeTarefas) {
-    criaTarefa(tarefa);
-  }
-}
-
-addicionaTarefasSalvas();
+// Chamada inicial para atualizar a lista
+atualizarListaTarefas();

@@ -1,48 +1,72 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ToDo-List</title>
-
+    <title>Lista de Tarefas</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <section class="container">
-      <h1>ToDo-List</h1>
+    <h1>Lista de Tarefas</h1>
 
-      <p>
-        <input type="text" class="input-tarefa" />
-        <button class="btn-tarefa">Adicionar nova tarefa</button>
-      </p>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-sm-6">
+          <div>
+            <h2>Tarefa</h2>
+            <input
+              type="text"
+              id="textoNoInput"
+              class="inputConfiguracao"
+              placeholder="Descrição da tarefa"
+            />
+            <button id="adicionaBotao" class="btnConfiguracao">
+              Adicionar Tarefa
+            </button>
+          </div>
 
-      <ul class="tarefas"></ul>
-    </section>
+          <div>
+            <h2>Pesquisar Tarefa por ID</h2>
+            <input
+              type="number"
+              id="idTarefa"
+              class="inputConfiguracao"
+              placeholder="ID da Tarefa"
+            />
+            <button id="btnPesquisa" class="btnConfiguracao">
+              Pesquisar
+            </button>
+          </div>
 
-    <section>
-      <table class="table invisivel">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Tarefa</th>
-            <th scope="col">Botões</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+          <div>
+            <h2>Listar</h2>
+            <button id="btnListar" class="btnConfiguracao">
+              Listar
+            </button>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-sm-6">
+          <div>
+            <h2>Lista de Tarefas</h2>
+            <ul id="listaDeTarefa" class="d-grid gap-5 col-6 mx-auto">
+              <!-- Tarefas serão exibidas aqui -->
+            </ul>
+          </div>
+
+          <div>
+            <p id="pesquisaResultado"></p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div> <!--Fim do container-->
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
