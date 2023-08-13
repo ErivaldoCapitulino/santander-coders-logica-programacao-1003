@@ -36,9 +36,9 @@ pet = "Spike";
 // Cannot find properties of undefined (reading nomePropriedade)
 
 // Null
-let lastName = null;
-// console.log(lastName);
-// console.log(typeof lastName); // null?
+let lastnome = null;
+// console.log(lastnome);
+// console.log(typeof lastnome); // null?
 
 // Symbols
 const s1 = Symbol("foo");

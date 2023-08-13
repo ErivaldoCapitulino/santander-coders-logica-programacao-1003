@@ -1,7 +1,7 @@
 const lugares = [
   { nome: "Sala de Reuniões", capacidade: 8 },
   { nome: "Auditório", capacidade: 50 },
-  { nome: "Sala de Treinamento", capacidade: 20 },
+  { nome: "Sala de Treinomento", capacidade: 20 },
   { nome: "Sala de Conferências", capacidade: 30 },
   { nome: "Sala de Estudos", capacidade: 12 },
 ];

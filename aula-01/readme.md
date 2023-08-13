@@ -153,8 +153,8 @@ console.log(typeof pet); // string
 `Null` é um literal em JavaScript, que representa um valor nulo ou "vazio", inexistente.
 
 ```js
-let lastName = null;
-console.log(typeof lastName); // null?
+let lastnome = null;
+console.log(typeof lastnome); // null?
 ```
 
 ---

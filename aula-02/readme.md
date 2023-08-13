@@ -118,10 +118,10 @@ Inicialmente, quando se deseja endereçar um valor padrão à variável, um padr
 let user;
 // let user = "";
 // let user = "João";
-let username = user || "Usuário sem nome";
-console.log("username ||:", username);
-username = user ?? "Usuário sem nome";
-console.log("username ??:", username);
+let usernome = user || "Usuário sem nome";
+console.log("usernome ||:", usernome);
+usernome = user ?? "Usuário sem nome";
+console.log("usernome ??:", usernome);
 ```
 
 ---
