@@ -58,6 +58,11 @@ ul li button {
   margin-bottom: 30px;
 }
 
+.btnConfiguracao:hover {
+  background: #42350e;
+  color: #ffca28;
+}
+
 .inputConfiguracao {
   padding: 10px 20px;
   border-radius: 4px;

@@ -2,18 +2,21 @@ const construirCorpoEmail = require("./construirCorpoEmail");
 const getDiaSemana = require("./getDiaSemana");
 const enviarEmail = require("./envia-email");
 
+const verificaDiaSemana = () => {
+  const diaDaSemana = getDiaSemana();
+  if (diaDaSemana !== 1) {
+    console.log("Hoje não é segunda-feira. Emails não serão enviados.");
+    return;
+  }
+};
+
 const enviarEmailClientes = (
   listaDeClientes,
   novoVeiculo,
   maisVendido,
   aquisicao
 ) => {
-  const diaDaSemana = getDiaSemana();
-
-  if (diaDaSemana !== 6) {
-    console.log("Hoje não é segunda-feira. Emails não serão enviados.");
-    return;
-  }
+  verificaDiaSemana();
 
   listaDeClientes.forEach((cliente) => {
     if (cliente.emailMarketing) {

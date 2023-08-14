@@ -25,9 +25,9 @@ const mostraSeFoiSalvo = () => {
 };
 
 // Função para apagar a mensagem
-function apagarMensagem() {
+const apagarMensagem = () => {
   listaDeTarefa.innerHTML = "";
-}
+};
 
 const atualizarListaTarefas = () => {
   listaDeTarefa.innerHTML = "";
@@ -53,6 +53,7 @@ const atualizarListaTarefas = () => {
   });
 };
 
+// Editar
 const editarTarefa = (id) => {
   const novaDescricao = prompt("Digite a nova descrição da tarefa:");
   if (novaDescricao !== null) {
@@ -66,6 +67,7 @@ const editarTarefa = (id) => {
   }
 };
 
+// Remover
 const removerTarefa = (id) => {
   const indexDaTarefa = tarefas.findIndex((tarefa) => tarefa.id === id);
   if (indexDaTarefa !== -1) {
@@ -76,10 +78,12 @@ const removerTarefa = (id) => {
   }
 };
 
+// Pesquisar por ID
 const pesquisarTarefasId = (id) => {
   const tarefa = tarefas.find((tarefa) => tarefa.id === id);
   if (tarefa) {
     pesquisaResultado.innerText = `Tarefa encontrada - ID: ${tarefa.id} - Descrição: ${tarefa.descricao}`;
+    apagarMensagem();
   } else {
     pesquisaResultado.innerText = "Tarefa não encontrada.";
   }
@@ -90,6 +94,29 @@ adicionaBotao.addEventListener("click", () => {
   if (descricao.trim() !== "") {
     adicionaTarefa(descricao);
     textoNoInput.value = "";
+  }
+});
+
+// Atualiza tarefas apertando o botão enter
+textoNoInput.addEventListener("keypress", function (e) {
+  if (e.keyCode === 13) {
+    if (!textoNoInput.value) return;
+
+    adicionaTarefa(textoNoInput.value);
+
+    textoNoInput.value = "";
+    textoNoInput.focus();
+  }
+});
+
+idTarefa.addEventListener("keypress", function (e) {
+  if (e.keyCode === 13) {
+    if (!idTarefa.value) return;
+
+    pesquisarTarefasId(Number(idTarefa.value));
+
+    idTarefa.value = "";
+    idTarefa.focus();
   }
 });
 
