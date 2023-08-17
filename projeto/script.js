@@ -72,6 +72,7 @@ const removerTarefa = (id) => {
   const indexDaTarefa = tarefas.findIndex((tarefa) => tarefa.id === id);
   if (indexDaTarefa !== -1) {
     tarefas.splice(indexDaTarefa, 1);
+    tarefas.length++;
     atualizarListaTarefas();
   } else {
     alert("Tarefa não encontrada.");
